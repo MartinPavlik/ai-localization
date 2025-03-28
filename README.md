@@ -12,6 +12,58 @@ This library automates the translation of localization files across multiple lan
 
 For new projects or complete retranslations, you can use the `recreate: true` option to generate translations from scratch.
 
+## Expected structure of the source files
+
+The source translations need to have this structure:
+
+```json
+{
+  "key": "value"
+}
+```
+
+The output translations will have the same structure:
+
+```json
+{
+  "key": "value"
+}
+```
+
+### Example
+
+So for example if you have this source file:
+
+en.json:
+```json
+{
+  "hello": "Hello"
+}
+```
+
+It will generate the following translations:
+cs.json:
+```json
+{
+  "hello": "Ahoj"
+}
+```
+
+pl.json:
+```json
+{
+  "hello": "Cześć"
+}
+```
+
+de.json:
+```json
+{
+  "hello": "Hallo"
+}
+```
+
+
 ## Installation
 
 ```
