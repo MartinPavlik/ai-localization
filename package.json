@@ -1,0 +1,30 @@
+{
+  "name": "@satankebab/ai-localization",
+  "private": false,
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "author": "Martin Pavlik",
+  "license": "MIT",
+  "description": "A library for translating frontend localization files using OpenAI's Assistant API.",
+  "type": "module",
+  "keywords": [
+    "openai",
+    "assistant",
+    "translation",
+    "localization",
+    "frontend"
+  ],
+  "dependencies": {
+    "@satankebab/promise-all-limited": "^1.0.0",
+    "chalk": "^5.4.1",
+    "openai": "^4.71.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}

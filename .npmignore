@@ -1,0 +1,8 @@
+.env
+.git
+.gitignore
+.nvmrc
+.vscode
+node_modules
+run.ts
+dist/run.js
