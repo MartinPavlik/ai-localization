@@ -193,6 +193,7 @@ The library intelligently determines what needs to be translated:
 1. **Reads the source file** (e.g., `en.json`)
 2. **Detects changed keys** using `git diff` on the source file
 3. **For each target file** (e.g., `pt.json`, `es.json`):
+   - **Requires the target file to exist** (throws error if not found)
    - Compares source and target to find missing keys
    - Combines changed keys + missing keys into a set to translate
    - Only translates what's needed for that specific file
@@ -204,10 +205,11 @@ The library intelligently determines what needs to be translated:
 6. **Merges translations** with existing target files
 
 ### Recreate Mode (`recreate: true`)
-Translates all keys from the source file to all target files, useful for:
+Translates all keys from the source file to all target files. **Target files will be created if they don't exist.** Useful for:
 - Initial setup of translation files
 - Complete retranslation after major changes
 - Starting fresh with updated translation guidelines
+- Creating new language files
 
 ### Smart Scenarios Handled
 
@@ -307,6 +309,20 @@ Unexpected token 'i', "{invalid js"... is not valid JSON
 ```
 
 ## Troubleshooting
+
+### Target Files Must Exist
+
+In normal mode (`recreate: false`), all target files must exist before running translations. If a target file doesn't exist, you'll get an error:
+
+```
+Target file not found: ./locales/pt.json. Please create the file before running translations, or use recreate: true to generate it from scratch.
+```
+
+**Solutions:**
+- Create empty target files: `echo '{}' > pt.json`
+- Use `recreate: true` to generate files from scratch
+
+In `recreate: true` mode, target files will be created automatically if they don't exist.
 
 ### Git Diff Not Working
 

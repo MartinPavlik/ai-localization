@@ -300,12 +300,12 @@ export const generateTranslations = ({
           keysToTranslate = sourceContent;
         } else {
           // Compare source and target to find missing keys
-          let targetContent: Record<string, string> = {};
+          let targetContent: Record<string, string>;
           try {
             targetContent = JSON.parse(fs.readFileSync(targetPath, { encoding: "utf8" }));
             console.log(chalk.gray(`📖 ${chalk.bold(file)}: Loaded existing file with ${chalk.bold(Object.keys(targetContent).length.toString())} keys`));
-          } catch (e) {
-            console.log(chalk.gray(`📄 ${chalk.bold(file)}: No existing file found, will translate all keys`));
+          } catch (e: any) {
+            throw new Error(`Target file not found: ${targetPath}. Please create the file before running translations, or use recreate: true to generate it from scratch.`);
           }
           
           // Find keys that need to be translated:
@@ -352,7 +352,7 @@ export const generateTranslations = ({
         console.log(chalk.blue(`🔄 ${chalk.bold(file)}: creating ${chalk.bold(chunks.length.toString())} chunks`));
         // Call the AI assistant for each chunk
         const responses = await promiseAllLimited(
-          PARALLEL_LIMIT,
+          parallelLimit,
           chunks.map((chunk, chunkIndex) => async () => {
             console.log(
               chalk.blue(`🤖 ${chalk.bold(file)}: calling AI assistant for chunk ${chalk.bold((chunkIndex + 1).toString())} of ${
